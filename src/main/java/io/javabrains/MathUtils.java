@@ -17,7 +17,7 @@ public class MathUtils {
     public int multiply(int a, int b) {
         int result = 0;
         for (int i = 0; i < b; i++) {
-            result += adder.add(result, a);
+            result = adder.add(result, a);
         }
         return result;
     }

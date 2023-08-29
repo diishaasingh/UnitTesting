@@ -79,24 +79,25 @@ class MathUtilsTest {
 //        //ASSERT
 //        assertEquals(expected, result);
 //    }
-    
+       
     @Test
     public void testMultiply() {
         // ARRANGE
-        int a = 2;
-        int b = 3;
-        int expected = 6;
-
         Adder adderMock = mock(Adder.class);
-        when(adderMock.add(anyInt(), anyInt())).thenReturn(a);
+        when(adderMock.add(anyInt(), anyInt())).thenAnswer(invocation -> {
+            int a = invocation.getArgument(0);
+            int b = invocation.getArgument(1);
+            return a + b;
+        });
         MathUtils mathUtils = new MathUtils(adderMock);
+
         // ACT
-        int result = mathUtils.multiply(a, b);
+        int result = mathUtils.multiply(2, 3);
 
         // ASSERT
-        verify(adderMock, times(b)).add(anyInt(), anyInt());
-        assertEquals(expected, result);
+        assertEquals(6, result);
     }
+
 }
 
 
